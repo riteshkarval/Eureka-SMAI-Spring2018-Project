@@ -19,3 +19,10 @@ This problem can be considered as Classification problem (with classes 1,2,3,4,5
 
 Success Metrics :
 As this problem is Classification Problem Metrics we use are Accuracy, F-score
+
+Steps :
+
+1. Data Collection
+2. Data Preprocessing
+3. Feature Extraction(Genre)
+4. Sentiment Analysis
