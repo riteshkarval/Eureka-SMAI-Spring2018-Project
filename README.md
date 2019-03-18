@@ -13,3 +13,9 @@ In this , we trying to rate(1-5 ) for each genre of the movie based on the revie
 
 Challenge :
 Rating movie according to genres
+
+Problem Categorization :
+This problem can be considered as Classification problem (with classes 1,2,3,4,5) rather than regression
+
+Success Metrics :
+As this problem is Classification Problem Metrics we use are Accuracy, F-score
