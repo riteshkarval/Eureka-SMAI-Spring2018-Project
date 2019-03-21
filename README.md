@@ -25,5 +25,4 @@ Steps :
 1. Data Collection
 2. Data Preprocessing
 3. Feature Extraction(Genre)
-4. Sentiment Analysis
-4- Movie rating
+4. Movie rating
