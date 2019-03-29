@@ -1,4 +1,4 @@
-Predicting Movie Ratings Based on Reviews
+Topic of project: Predicting Movie Ratings Based on Reviews
 
 Literature Survey:
  http://aclweb.org/anthology/Y07-1050 : In this paper they have conducted various experiments on different classifiers like SVM, Maximum Entropy and Scoring which resulted in poor performance.  Then they have collaborated all the three models which significantly increased the performance.
@@ -27,5 +27,10 @@ Expectations
 1) copy the results in research paper <br>
 2) extend it to Indian movies
 
-
+Scrapping.py 
+This code read the imdb.csv dataset.
+It extracts the comments using webscrapping ( using BeautifulSoup, urllib) from the imdb reviews page for each movie.
+Stores all the user comments for a given movie into a txt file.
+For 14K movies in the imdb data set, it creates 14K text files. 
+The sample output is uploaded tt0012349.txt 
 
