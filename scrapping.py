@@ -24,7 +24,7 @@ for i in range(100):
     
     for p in soup.find_all('div', class_ = 'text show-more__control'):
         #print(p)
-        comments.append(p)
+        comments.append(p.text)
        
     newfile = df['tid'][i]+".txt"       
     with open(newfile, "w", encoding='utf-8') as output:
