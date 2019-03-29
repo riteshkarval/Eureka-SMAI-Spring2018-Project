@@ -23,5 +23,9 @@ Model Selection/ Choice: Based on empirical experiments
 
 Validation and Testing: We can tune the parameters based on the validation set and calculate accuracy on the test data
 
+Expectations
+1) copy the results in research paper <br>
+2) extend it to Indian movies
+
 
 
