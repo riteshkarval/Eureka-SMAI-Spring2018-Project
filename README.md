@@ -9,7 +9,7 @@ Data Extraction:
 •	Download the IMDB dataset from Kaggle (https://www.kaggle.com/orgesleka/imdbmovies/version/1) <br>
 •	Perform Data Cleaning (missing attributes/ misplaced data) <br>
 •	From the CSV file we can extract the movie title id for each given movie.<br>
-•	Frame a url https://www.imdb.com/title/tt0032976/reviews 
+•	Frame a url https://www.imdb.com/title/tt0032976/reviews. 
 For example, title id of movie Rebecca is tt0032976. <br>
 •	Using web scrapping, we can retrieve the User Reviews section from the above mentioned url. <br>
 
