@@ -13,9 +13,9 @@ Data Extraction:
 For example, title id of movie Rebecca is tt0032976. <br>
 •	Using web scrapping, we can retrieve the User Reviews section from the above mentioned url. <br>
 
-Problem Categorization:  It is a classification problem. (1- very bad 2- bad 3- average 4-good 5-excellent)
+Problem Categorization:  It is a classification problem. + Regression problem 
 
-Success Metric: Accuracy
+Success Metric: Accuracy, Recall, Precision, F1 Score
 
 Feature Extraction: Sentence to Vector/ Paragraph to Vector
 
@@ -24,8 +24,10 @@ Model Selection/ Choice: Based on empirical experiments
 Validation and Testing: We can tune the parameters based on the validation set and calculate accuracy on the test data
 
 Expectations
-1) copy the results in research paper <br>
-2) extend it to Indian movies
+1) Need to implement the research paper (SVM, Maximum Entropy,Scoring) <br>
+2) Need to implement using Deep Learning Techniques
+3) Need to extend it to Indian Movies
+4) Categorize the rating (screenplay, music, action etc..)
 
 Scrapping.py 
 This code read the imdb.csv dataset.
