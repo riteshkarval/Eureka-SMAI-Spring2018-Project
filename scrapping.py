@@ -7,9 +7,9 @@
 
 #Program to webscrape the imdb site of movie reviews.
 #Retrieve the movie title id from the imdb data set that has been downloaded from kaggle.
+#Based on the movie title id, frame url and retrieve the user reviews and ratings for each movie.
 
 import pandas as pd
-import numpy as np
 import bs4 as bs
 import urllib.request
 import re
@@ -24,6 +24,12 @@ def CommentCleaner(para):
         clean_sen = TextCleaner(sentance)
         cleanPara.append(clean_sen)
     return cleanPara
+
+#Code to retrieve the rating of each comment
+def ratingCleaner(rating):
+    text=re.sub(r'\n',r'',rating)
+    text = text.split(u"/")
+    return text[0]
 
 #Code to clean the text by replacing the punctuations, numbers, other html tags
 def TextCleaner(text):   
@@ -54,18 +60,31 @@ imdbData = pd.read_csv("/Users/Sushom-Dell/Desktop/Ananya/New folder/smai/PROJEC
 #Converting data into data frame
 df = pd.DataFrame(imdbData,columns=imdbData.columns)
 #***********************************************************************
-#for i in range(len(df['tid'])):
-for i in range(100):
+#for i in range(len(df['tid'])): #Uncomment this to make the code run for all the movie in the imdb dataset.
+for i in range(1): #Code runs for 1 movie. 
     #Frame the url by inserting title id 
     url = 'https://www.imdb.com/title/'+df['tid'][i]+'/reviews'
     source = urllib.request.urlopen(url).read()    
     soup = bs.BeautifulSoup(source,'lxml')
     comments = [] #Array to hold the list of comments for a given movie
-    
-    for p in soup.find_all('div', class_ = 'text show-more__control'):  
-        cleanP = CommentCleaner(str(p)) #Clean the data
-        comments.append([cleanP[0]+'/n']) #Store each user comment into an array 'comments'
-       
+    #Get the data in the div of class 'lister-item-content'
+    #It contains the review details
+    for p in soup.find_all('div', class_ = 'lister-item-content'):
+        
+        #Extract the comment from the review details
+        comment = p.find('div', class_='text show-more__control')
+        cleanP = CommentCleaner(str(comment)) #Clean the comment data
+        
+        #Extract the rating given against each comment by the user.
+        rating =  p.find('span', class_='rating-other-user-rating')
+        userRating = '0' #Initialize rating to zero
+        
+        if rating != None: #If user has given the rating then retrieve else leave it as 0
+            userRating = ratingCleaner(rating.text)
+        #Append the comment and rating pair and store it into an array
+        comments.append([cleanP[0],userRating]) 
+        
+
     newfile = df['tid'][i]+".txt"        #File name is titleid.txt
     with open(newfile, "w", encoding='utf-8') as output:  #Creating a new file for each movie
         output.write(str(comments))      #writing the comments into the file.
