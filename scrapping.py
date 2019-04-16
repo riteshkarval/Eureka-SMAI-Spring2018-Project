@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
-"""
-@author: Ananya Mukherjee
-"""
-
 #Program to webscrape the imdb site of movie reviews.
 #Retrieve the movie title id from the imdb data set that has been downloaded from kaggle.
 #Based on the movie title id, frame url and retrieve the user reviews and ratings for each movie.
@@ -55,7 +48,7 @@ def TextCleaner(text):
  
 #***********************************************************************
 #Read the data from .csv file for IMDB Data set
-imdbData = pd.read_csv("/Users/Sushom-Dell/Desktop/Ananya/New folder/smai/PROJECT/imdb.csv")
+imdbData = pd.read_csv("imdb.csv")
 #***********************************************************************
 #Converting data into data frame
 df = pd.DataFrame(imdbData,columns=imdbData.columns)
