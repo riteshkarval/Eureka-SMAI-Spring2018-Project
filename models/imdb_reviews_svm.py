@@ -12,7 +12,7 @@ import numpy as np
 # In[2]:
 
 
-with open('reviews.pkl', 'rb') as handle:
+with open('../dataset/reviews.pkl', 'rb') as handle:
     data = pickle.load(handle)
 
 
