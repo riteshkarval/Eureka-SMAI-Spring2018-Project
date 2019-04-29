@@ -1,13 +1,13 @@
-Docs -> Contains Project Report and Presentation Slides
-SVM_Rating -> Final SVM training and testing models
-Dataset -> Contains the Data used in this project
-Examples -> Keras Sentimental Analysis Implementation
-Models -> This folder contains various models implemented for the project.
-SVM_KNN_NB.ipynb - Implementation of our approach
-models.py -> Paper Implementation
+Docs -> Contains Project Report and Presentation Slides <br>
+SVM_Rating -> Final SVM training and testing models <br>
+Dataset -> Contains the Data used in this project <br>
+Examples -> Keras Sentimental Analysis Implementation <br>
+Models -> This folder contains various models implemented for the project. <br>
+SVM_KNN_NB.ipynb - Implementation of our approach <br>
+models.py -> Paper Implementation <br>
 
 
-Kindly go through the report documents for a better understanding.
+Kindly go through the report documents for a better understanding. <br>
 
 **************************************************************************************************************************
 Topic of project: Predicting Movie Ratings Based on Reviews
