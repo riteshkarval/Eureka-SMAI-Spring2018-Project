@@ -208,6 +208,16 @@ def main():
     print(confusion_matrix(y_test_1,y))
     print(classification_report(y_test_1, y))
     print(accuracy_score(y_test_1, y))
+    
+    #Plot Graph for Training and Test errors.
+    x = np.arange(len(y))
+    
+    plt.figure(figsize=(20,10))
+    plt.plot(x,y,label='Actual')
+    plt.plot(x,y_test_1,label='Prediction')
+    plt.legend()
+    plt.title('Performance on Train set')
+    plt.show()
 
 
 main()
