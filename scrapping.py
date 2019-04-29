@@ -76,8 +76,8 @@ for i in range(1): #Code runs for 1 movie.
             userRating = ratingCleaner(rating.text)
         #Append the comment and rating pair and store it into an array
         comments.append([cleanP[0],userRating]) 
-        
-
-    newfile = df['tid'][i]+".txt"        #File name is titleid.txt
-    with open(newfile, "w", encoding='utf-8') as output:  #Creating a new file for each movie
-        output.write(str(comments))      #writing the comments into the file.
+    review[df['tid'][i]] = comments
+    
+# Store data (serialize)
+with open('dataset/movieReviews.pkl','wb') as handle:  
+    pickle.dump(review, handle, protocol=pickle.HIGHEST_PROTOCOL)
