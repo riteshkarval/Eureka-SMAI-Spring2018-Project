@@ -1,3 +1,15 @@
+Docs -> Contains Project Report and Presentation Slides
+SVM_Rating -> Final SVM training and testing models
+Dataset -> Contains the Data used in this project
+Examples -> Keras Sentimental Analysis Implementation
+Models -> This folder contains various models implemented for the project.
+SVM_KNN_NB.ipynb - Implementation of our approach
+models.py -> Paper Implementation
+
+
+Kindly go through the report documents for a better understanding.
+
+**************************************************************************************************************************
 Topic of project: Predicting Movie Ratings Based on Reviews
 
 Literature Survey:
@@ -27,7 +39,7 @@ Expectations
 1) Need to implement the research paper (SVM, Maximum Entropy,Scoring) <br>
 2) Need to implement using Deep Learning Techniques
 3) Need to extend it to Indian Movies
-4) Categorize the rating (screenplay, music, action etc..)
+4) Categorize the rating (Direction, Music, Action etc..)
 
 Scrapping.py 
 This code read the imdb.csv dataset.
@@ -35,4 +47,5 @@ It extracts the comments using webscrapping ( using BeautifulSoup, urllib) from 
 Stores all the user comments for a given movie into a txt file.
 For 14K movies in the imdb data set, it creates 14K text files. 
 The sample output is uploaded tt0012349.txt 
+
 
