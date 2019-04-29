@@ -37,7 +37,7 @@ def model_1(dataset_train,dataset_test):
     print(confusion_matrix(y_test, y_pred))
     print(classification_report(y_test, y_pred))
     print(accuracy_score(y_test, y_pred))
-    return y_pred,y_test,classifier1,X_train
+    return y_pred,y_test,classifier1,X_train,X_test,y_train
 
 
 def model_2(dataset_train,dataset_test):
@@ -51,7 +51,7 @@ def model_2(dataset_train,dataset_test):
         poscutoff = int(len(posfeats) * pospercent)
         trainfeats = negfeats[:negcutoff] + posfeats[:poscutoff]
         algorithm = nltk.classify.MaxentClassifier.ALGORITHMS[0]
-        classifier = nltk.MaxentClassifier.train(trainfeats, algorithm, max_iter=12)
+        classifier = nltk.MaxentClassifier.train(trainfeats, algorithm, max_iter=2)
         return classifier
 
 
@@ -64,10 +64,12 @@ def model_2(dataset_train,dataset_test):
     y_test = dataset_test['class']
     y_pred = []
     reviews = X_test
+    p=[]
     for to_review in reviews:
         to_review_words = to_review.split(" ")
         wordfeats = word_feats(to_review_words)
         probs = classifier.prob_classify(wordfeats)
+        p.append([probs.prob(0),probs.prob(1)])
         y_pred.append(probs.max())
 
     print(y_pred)
@@ -76,7 +78,7 @@ def model_2(dataset_train,dataset_test):
     print(confusion_matrix(y_test, y_pred))
     print(classification_report(y_test, y_pred))
     print(accuracy_score(y_test, y_pred))
-    return y_pred,y_test
+    return y_pred,y_test,p,classifier
 
 def model_3(dataset_train,dataset_test):
 
@@ -157,25 +159,55 @@ def naive_voting(y_1,y_2,y_3):
             y.append(1)
     return y
 
+def weighted_voting(y_pred_1,y_pred_2,y_pred_3,y_test_1,classifier,X_train,X_test,y_train,probs,classifier1):
+    classifier.fit(X_train, y_train)
+    y = classifier.decision_function(X_train)
+    w_norm = np.linalg.norm(classifier.coef_)
+    dist = y / w_norm
+    l = np.mean(dist)
+    y = classifier.decision_function(X_test)
+    w_norm = np.linalg.norm(classifier.coef_)
+    dist = y / w_norm
+    weights_1 = dist * l
+    avg_prob = l
+    weights_3 = y_pred_3
+    weights_2 = []
+    for i in range(len(probs)):
+        weights = (probs[i][1] - probs[i][0]) * avg_prob
+        weights_2.append(weights)
+    w_1= np.array(weights_1)
+    w_2 = np.array(weights_2)
+    w_3 = np.array(weights_3)
+    y = []
+    for i in range(len(y_test_1)):
+        if (w_1[i] < w_2[i])and (w_1[i] < w_3[i]):
+                y.append(y_pred_1[i])
+        elif w_2 [i]< w_3[i]and (w_2 [i]< w_1[i]):
+                y.append(y_pred_2[i])
+        elif w_3[i] < w_2[i]and (w_3[i] < w_1[i]):
+                y.append(y_pred_3[i])
+    return y
+
 def main():
     dataset=get_data()
     dataset_train,dataset_test=split(dataset)
-    y_pred_1,y_test_1,classifier,X_train=model_1(dataset_train,dataset_test)
-    y_pred_2,y_test_2=model_2(dataset_train, dataset_test)
+    y_pred_1,y_test_1,classifier,X_train,X_test,y_train=model_1(dataset_train,dataset_test)
+    y_pred_2,y_test_2,probs,classifier1=model_2(dataset_train, dataset_test)
     y_pred_3, y_test_3=model_3(dataset_train,dataset_test)
+
     y=naive_voting(y_pred_1,y_pred_2,y_pred_3)
     print("**************** Naive Voting ************************")
     print(confusion_matrix(y_test_1, y))
     print(classification_report(y_test_1, y))
     print(accuracy_score(y_test_1, y))
-    y=pd.concat([pd.DataFrame(y_pred_1),pd.DataFrame(y_pred_2),pd.DataFrame(y_pred_3)] ,axis=1)
-    classifier.fit(y,y_test_1)
-    n=classifier.predict(y)
-    print("**************** SVM Voting ************************")
-    print(confusion_matrix(y_test_1,n))
-    print(classification_report(y_test_1, n))
-    print(accuracy_score(y_test_1, n))
 
+    y=weighted_voting(y_pred_1,y_pred_2,y_pred_3,y_test_1,classifier,X_train,X_test,y_train,probs,classifier1)
+    #print(y)
+    y=pd.DataFrame(y)
+    print("**************** Weighted Voting ************************")
+    print(confusion_matrix(y_test_1,y))
+    print(classification_report(y_test_1, y))
+    print(accuracy_score(y_test_1, y))
 
 
 main()
