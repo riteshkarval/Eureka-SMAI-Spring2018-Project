@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-"""
-@author: Ananya Mukherjee
-"""
 
 #Program to webscrape the imdb site of movie reviews.
 #Retrieve the movie title id from the imdb data set that has been downloaded from kaggle.
