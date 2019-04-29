@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from sklearn import svm
-
+import matplotlib.pyplot as plt
 
 def get_data():
     dataset = pd.read_csv("preprocessed_dataset.csv")
